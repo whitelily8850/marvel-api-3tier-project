@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: avengers-api
+  namespace: avengers
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: avengers-api
+  template:
+    metadata:
+      labels:
+        app: avengers-api
+    spec:
+      containers:
+      - name: avengers-api
+        image: mydevopsuser46/marvelapiproject:v1
+        ports:
+        - containerPort: 3000
+        env:
+        - name: MONGO_URL
+          value: "mongodb://admin:admin123@mongo-service:27017/admin"

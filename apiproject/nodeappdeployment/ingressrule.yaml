@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: avengers-route
+  namespace: avengers
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`avengers.local`) &&  PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: avengers-api-service
+          port: 80
